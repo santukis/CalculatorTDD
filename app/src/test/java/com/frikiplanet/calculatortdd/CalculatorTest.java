@@ -1,9 +1,6 @@
 package com.frikiplanet.calculatortdd;
 
 
-import com.google.common.truth.Truth;
-
-import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -122,6 +119,231 @@ public class CalculatorTest {
                 $(Math.pow(2, 1000), Math.pow(2, 1000)),
                 $(Math.pow(2, 1023), 2),
                 $(Math.pow(2, 1024), 0)
+        );
+    }
+
+    @Parameters(method = "getValidDivisionInput")
+    @Test
+    public void divisionShouldReturnExpectedValueWhenOperandsAreValid(
+            double operand1, double operand2, double expectedValue) {
+
+        double result = calculator.division(operand1, operand2);
+
+        assertThat(result).isWithin(1.0e-10).of(expectedValue);
+    }
+
+    private Object[] getValidDivisionInput() {
+        return $(
+                $(6, 3, 2),
+                $(3, 2, 1.5),
+                $(33, -5, -6.6),
+                $(0.3, -0.25, -1.2)
+        );
+    }
+
+    @Parameters(method = "getInvalidDivisionInput")
+    @Test(expected = ArithmeticException.class)
+    public void divisionShouldThrowWhenOperandsOrResultAreInvalid(
+            double operand1, double operand2) {
+
+        calculator.division(operand1, operand2);
+    }
+
+    private Object[] getInvalidDivisionInput() {
+        return $(
+                $(Double.MAX_VALUE, 1),
+                $(1.2, Double.NaN),
+                $(Double.POSITIVE_INFINITY, 0.1),
+                $(-12, Double.NEGATIVE_INFINITY),
+                $(12, 0)
+        );
+    }
+
+    @Parameters(method = "getValidExponentiationInput")
+    @Test
+    public void exponentiationShouldReturnExpectedValueWhenOperandsAreValid(
+            double base, double exponent, double expectedValue) {
+
+        double result = calculator.exponentiation(base, exponent);
+
+        assertThat(result).isEqualTo(expectedValue);
+    }
+
+    private Object[] getValidExponentiationInput() {
+        return $(
+                $(2, 0, 1),
+                $(2, 1, 2),
+                $(2, 3, 8),
+                $(2, -2, 0.25)
+        );
+    }
+
+    @Parameters(method = "getInvalidExponentiationInput")
+    @Test(expected = ArithmeticException.class)
+    public void exponentiationShouldThrowWhenOperandsAreInvalid(
+            double base, double exponent) {
+        calculator.exponentiation(base, exponent);
+    }
+
+    private Object[] getInvalidExponentiationInput() {
+        return $(
+                $(0, -2),
+                $(Double.NEGATIVE_INFINITY, 2),
+                $(Double.NaN, -1),
+                $(2, Double.MAX_VALUE)
+        );
+    }
+
+    @Parameters(method = "getValidSquareRootInput")
+    @Test
+    public void squareRootShouldReturnExpectedValueWhenOperandsAreValid(
+            double radicand, double expectedValue) {
+
+        double result = calculator.squareRoot(radicand);
+
+        assertThat(result).isWithin(1.0e-3).of(expectedValue);
+    }
+
+    private Object[] getValidSquareRootInput() {
+        return $(
+                $(4, 2),
+                $(5, 2.236),
+                $(15, 3.872),
+                $(121, 11)
+        );
+    }
+
+    @Parameters(method = "getInvalidSquareRootInput")
+    @Test(expected = ArithmeticException.class)
+    public void squareRootShouldThrowWhenOperandIsInvalid(double radicand) {
+        calculator.squareRoot(radicand);
+    }
+
+    private Object[] getInvalidSquareRootInput() {
+        return $(
+                $(-3),
+                $(Double.POSITIVE_INFINITY),
+                $(Double.NaN),
+                $(-2.5)
+        );
+    }
+
+    @Parameters(method = "getValidLogarithm10Input")
+    @Test
+    public void logarithm10ShouldReturnExpectedValueWhenOperandIsValid(
+            double operand, double expectedValue) {
+
+        double result = calculator.logarithm10(operand);
+
+        assertThat(result).isWithin(1.0e-5).of(expectedValue);
+    }
+
+    private Object[] getValidLogarithm10Input() {
+        return $(
+                $(4, 0.6020599913),
+                $(49, 1.69019608),
+                $(121, 2.0827853703)
+        );
+    }
+
+    @Parameters(method = "getInvalidLogarithm10Input")
+    @Test(expected = ArithmeticException.class)
+    public void logarithm10ShouldThrowsWhenOperandAreInvalid(double operand) {
+        calculator.logarithm10(operand);
+    }
+
+    private Object[] getInvalidLogarithm10Input() {
+        return $(
+                $(-3),
+                $(Double.NEGATIVE_INFINITY),
+                $(0),
+                $(Double.NaN)
+        );
+    }
+
+    @Parameters(method = "getValidNaturalLogInput")
+    @Test
+    public void naturalLogarithmShouldReturnExpectedValueWhenOperandIsValid(
+            double operand, double expectedValue) {
+
+        double result = calculator.naturalLogarithm(operand);
+
+        assertThat(result).isWithin(1.0e-5).of(expectedValue);
+    }
+
+    private Object[] getValidNaturalLogInput() {
+        return $(
+                $(4, 1.386294),
+                $(25, 3.218875)
+        );
+    }
+
+    @Parameters(method = "getInvalidNaturalLogInput")
+    @Test(expected = ArithmeticException.class)
+    public void naturalLogarithmShouldThrowsWhenOperandIsInvalid(double operand) {
+        calculator.naturalLogarithm(operand);
+    }
+
+    private Object[] getInvalidNaturalLogInput() {
+        return $(
+                $(-3),
+                $(Double.POSITIVE_INFINITY),
+                $(Double.NaN),
+                $(0)
+        );
+    }
+
+    @Parameters(method = "getValidFactorialInput")
+    @Test
+    public void factorialShouldReturnExpectedValueWhenOperandIsValid(
+            double operand, double expectedValue) {
+
+        double result = calculator.factorial(operand);
+
+        assertThat(result).isEqualTo(expectedValue);
+    }
+
+    private Object[] getValidFactorialInput() {
+        return $(
+                $(0, 1),
+                $(1, 1),
+                $(2, 2),
+                $(3, 6),
+                $(4, 24),
+                $(5, 120),
+                $(6, 720),
+                $(10, 3_628_800)
+        );
+    }
+
+    @Parameters(method = "getInvalidFactorialInput")
+    @Test
+    public void factorialShouldThrowsWhenOperandIsInvalid(double operand) {
+
+        try{
+            calculator.factorial(operand);
+            Assert.fail("factorial should throws an Exception/Error");
+
+        } catch (ArithmeticException exception) {
+            assertThat(exception).isNotNull();
+            System.out.println("ArithmeticException has been thrown");
+
+        } catch (StackOverflowError error) {
+            assertThat(error).isNotNull();
+            System.out.println("StackOverflowError has been thrown");
+        }
+    }
+
+    private Object[] getInvalidFactorialInput() {
+        return $(
+                $(Double.MAX_VALUE),
+                $(Double.NaN),
+                $(Double.POSITIVE_INFINITY),
+                $(Double.NEGATIVE_INFINITY),
+                $(1_000_000),
+                $(-1),
+                $(2.3),
+                $(-2.3)
         );
     }
 }

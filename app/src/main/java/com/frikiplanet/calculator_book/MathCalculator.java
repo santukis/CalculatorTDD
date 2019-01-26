@@ -26,11 +26,8 @@ public class MathCalculator implements Calculator {
          if (endsWithOperator(to)) {
             return expression.replaceSymbol(to, symbol);
 
-         } else {
-            return expression.addSymbol(to, symbol);
          }
       }
-
       return expression.addSymbol(to, symbol);
    }
 

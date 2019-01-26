@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="wrap_content">
 
 
     <LinearLayout
         android:id="@+id/first_row"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="61dp"
+        android:weightSum="5"
         app:layout_constraintLeft_toRightOf="parent"
         app:layout_constraintRight_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        android:weightSum="5">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/bt_remove_last"
-            android:layout_weight="1"
             style="@style/Button.Operator"
+            android:layout_weight="1"
             android:background="@drawable/button_result"
             android:foreground="@drawable/button_background_transparent"
             android:text="@string/ce"
-            android:textSize="22sp"/>
+            android:textSize="22sp" />
 
         <Button
             android:id="@+id/bt_clear"
-            android:layout_weight="1"
             style="@style/Button.Operator"
+            android:layout_weight="1"
             android:background="@drawable/button_result"
             android:foreground="@drawable/button_background_transparent"
             android:text="@string/c"
@@ -35,22 +35,22 @@
 
         <Button
             android:id="@+id/bt_parenthesis_start"
-            android:layout_weight="1"
             style="@style/Button"
+            android:layout_weight="1"
             android:tag="("
             android:text="@string/parenthesis_start" />
 
         <Button
             android:id="@+id/bt_parenthesis_end"
-            android:layout_weight="1"
             style="@style/Button"
+            android:layout_weight="1"
             android:tag=")"
             android:text="@string/parenthesis_end" />
 
         <Button
             android:id="@+id/bt_division"
-            android:layout_weight="1"
             style="@style/Button.Operator"
+            android:layout_weight="1"
             android:tag="/"
             android:text="÷" />
 

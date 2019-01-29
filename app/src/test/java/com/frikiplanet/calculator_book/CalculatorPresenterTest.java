@@ -44,7 +44,6 @@ public class CalculatorPresenterTest {
    @Test
    public void addSymbolShouldCallShowErrorWhenCalculatorThrowsAnOperationException() {
       when(mockedCalculator.addSymbol(anyString(), anyString())).thenThrow(OperationException.class);
-
       presenter.addSymbol(anyString(), anyString());
 
       verify(mockedView, times(0)).showOperations(anyString());

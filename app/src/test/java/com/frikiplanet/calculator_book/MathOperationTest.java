@@ -6,9 +6,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 
@@ -29,7 +26,7 @@ public class MathOperationTest {
 
     @Parameters(method = "getValidAdditionInput")
     @Test
-    public void additionShouldReturnExpectedValueWhenOperandsAreValid(
+    public void additionShouldReturnExpectedValueWhenOperandsAreReal(
             double operand1, double operand2, double expectedValue) {
         //ACT OR WHEN
         double result = mathOperation.addition(operand1, operand2);
@@ -82,7 +79,7 @@ public class MathOperationTest {
 
     @Parameters(method = "getValidSubtractionInput")
     @Test
-    public void subtractionShouldReturnExpectedValueWhenOperandsAreValid(
+    public void subtractionShouldReturnExpectedValueWhenOperandsAreReal(
             double operand1, double operand2, double expectedValue) {
         double result = mathOperation.subtraction(operand1, operand2);
 
@@ -113,7 +110,7 @@ public class MathOperationTest {
 
     @Parameters(method = "getValidMultiplicationInput")
     @Test
-    public void multiplicationShouldReturnExpectedValueWhenOperandsAndResultAreValid(
+    public void multiplicationShouldReturnExpectedValueWhenOperandsAndResultAreReal(
             double operand1, double operand2, double expectedValue) {
         double result = mathOperation.multiplication(operand1, operand2);
 
@@ -156,7 +153,7 @@ public class MathOperationTest {
 
     @Parameters(method = "getValidDivisionInput")
     @Test
-    public void divisionShouldReturnExpectedValueWhenOperandsAreValid(
+    public void divisionShouldReturnExpectedValueWhenOperandsAreReal(
             double operand1, double operand2, double expectedValue) {
 
         double result = mathOperation.division(operand1, operand2);
@@ -199,7 +196,7 @@ public class MathOperationTest {
 
     @Parameters(method = "getValidExponentiationInput")
     @Test
-    public void exponentiationShouldReturnExpectedValueWhenInputIsValid(
+    public void exponentiationShouldReturnExpectedValueWhenInputAreIntegers(
             double base, double exponent, double expectedValue) {
 
         double result = mathOperation.exponentiation(base, exponent);
@@ -250,7 +247,7 @@ public class MathOperationTest {
 
     @Parameters(method = "getValidSquareRootInput")
     @Test
-    public void squareRootShouldReturnExpectedValueWhenInputIsValid(
+    public void squareRootShouldReturnExpectedValueWhenInputIsReal(
             double radicand, double expectedValue) {
 
         double result = mathOperation.squareRoot(radicand);
@@ -289,7 +286,7 @@ public class MathOperationTest {
 
     @Parameters(method = "getValidFactorialInput")
     @Test
-    public void factorialShouldReturnExpectedValueWhenOperandIsValid(
+    public void factorialShouldReturnExpectedValueWhenOperandIsNatural(
             double operand, double expectedValue) {
 
         double result = mathOperation.factorial(operand);

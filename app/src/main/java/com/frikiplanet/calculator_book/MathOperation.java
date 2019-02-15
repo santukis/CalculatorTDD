@@ -3,22 +3,23 @@ package com.frikiplanet.calculator_book;
 
 public class MathOperation {
 
-   public double addition(double operand1, double operand2) throws OperationException {
+   public double addition(Double operand1, Double operand2) throws OperationException {
 
       throwsIfValuesAreInvalid(operand1, operand2);
 
       return operand1 + operand2;
    }
 
-
-   public double subtraction(double operand1, double operand2) throws OperationException {
+   public double subtraction(Double operand1, Double operand2) throws OperationException {
 
       throwsIfValuesAreInvalid(operand1, operand2);
 
       return operand1 - operand2;
    }
 
-   public double multiplication(double operand1, double operand2) throws OperationException {
+   public double multiplication(Double operand1, Double operand2) throws OperationException {
+
+      throwsIfValuesAreInvalid(operand1, operand2);
 
       double result = operand1 * operand2;
 
@@ -27,7 +28,7 @@ public class MathOperation {
       return result;
    }
 
-   public double division(double dividend, double divisor) throws OperationException {
+   public double division(Double dividend, Double divisor) throws OperationException {
 
       throwsIfValuesAreInvalid(dividend, divisor);
 
@@ -38,12 +39,12 @@ public class MathOperation {
       return result;
    }
 
-   public double exponentiation(double base, double exponent) throws OperationException {
+   public double exponentiation(Double base, Double exponent) throws OperationException {
+
+      throwsIfValuesAreInvalid(base, exponent);
 
       if ((base == 0 || base == 1) && exponent != 0)
          return base;
-
-      throwsIfValuesAreInvalid(base, exponent);
 
       double result = 1;
       boolean expoNegative = exponent < 0;
@@ -59,7 +60,9 @@ public class MathOperation {
       return expoNegative ? (1 / result) : result;
    }
 
-   public double squareRoot(double radicand) throws OperationException {
+   public double squareRoot(Double radicand) throws OperationException {
+
+      throwsIfValuesAreInvalid(radicand);
 
       double aux;
       double squareRoot = radicand / 2;
@@ -80,7 +83,9 @@ public class MathOperation {
 
    }
 
-   public double factorial(double operand) throws OperationException {
+   public double factorial(Double operand) throws OperationException {
+
+      throwsIfValuesAreInvalid(operand);
 
       if (operand < 0)
          throw new OperationException("result is not valid");
@@ -95,10 +100,9 @@ public class MathOperation {
       return result;
    }
 
-   private void throwsIfValuesAreInvalid(double... values) throws OperationException {
-
+   private void throwsIfValuesAreInvalid(Double... values) throws OperationException {
       for (Double value : values) {
-         if (value == Double.MAX_VALUE || Double.isInfinite(value) || Double.isNaN(value))
+         if (value == null || value == Double.MAX_VALUE || Double.isInfinite(value) || Double.isNaN(value))
             throw new OperationException();
       }
    }

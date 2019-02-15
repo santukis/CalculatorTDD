@@ -66,6 +66,20 @@ public class MathOperationTest {
         };
     }
 
+    @Parameters(method = "getNullInput")
+    @Test(expected = OperationException.class)
+    public void additionShouldThrowsWhenValuesAreNull(Double operand1, Double operand2) {
+        mathOperation.addition(operand1, operand2);
+    }
+
+    private Object[] getNullInput() {
+        return new Object[]{
+                new Object[]{null, new Double(5)},
+                new Object[]{null, null},
+                new Object[]{new Double(10), null}
+        };
+    }
+
     @Parameters(method = "getValidSubtractionInput")
     @Test
     public void subtractionShouldReturnExpectedValueWhenOperandsAreValid(
@@ -88,6 +102,12 @@ public class MathOperationTest {
     @Parameters(method = "getInvalidInput")
     @Test(expected = OperationException.class)
     public void subtractionShouldThrowsWhenOperandsAreInvalid(double operand1, double operand2) {
+        mathOperation.subtraction(operand1, operand2);
+    }
+
+    @Parameters(method = "getNullInput")
+    @Test(expected = OperationException.class)
+    public void subtractionShouldThrowsWhenValuesAreNull(Double operand1, Double operand2) {
         mathOperation.subtraction(operand1, operand2);
     }
 
@@ -114,6 +134,12 @@ public class MathOperationTest {
     @Test(expected = OperationException.class)
     public void multiplicationShouldThrowsWhenOperandsOrResultAreInvalid(
             double operand1, double operand2) {
+        mathOperation.multiplication(operand1, operand2);
+    }
+
+    @Parameters(method = "getNullInput")
+    @Test(expected = OperationException.class)
+    public void multiplicationShouldThrowsWhenValuesAreNull(Double operand1, Double operand2) {
         mathOperation.multiplication(operand1, operand2);
     }
 
@@ -152,6 +178,12 @@ public class MathOperationTest {
     public void divisionShouldThrowWhenOperandsOrResultAreInvalid(
             double operand1, double operand2) {
 
+        mathOperation.division(operand1, operand2);
+    }
+
+    @Parameters(method = "getNullInput")
+    @Test(expected = OperationException.class)
+    public void divisionShouldThrowsWhenValuesAreNull(Double operand1, Double operand2) {
         mathOperation.division(operand1, operand2);
     }
 
@@ -197,6 +229,12 @@ public class MathOperationTest {
         mathOperation.exponentiation(base, exponent);
     }
 
+    @Parameters(method = "getNullInput")
+    @Test(expected = OperationException.class)
+    public void exponentiationShouldThrowsWhenValuesAreNull(Double base, Double exponent) {
+        mathOperation.exponentiation(base, exponent);
+    }
+
     private Object[] getInvalidExponentiationInput() {
         return $(
                 $(5, 3.3),
@@ -233,6 +271,11 @@ public class MathOperationTest {
     @Test(expected = OperationException.class)
     public void squareRootShouldThrowWhenOperandIsInvalid(double radicand) {
         mathOperation.squareRoot(radicand);
+    }
+
+    @Test(expected = OperationException.class)
+    public void squareRootShouldThrowsWhenValuesAreNull() {
+        mathOperation.squareRoot(null);
     }
 
     private Object[] getInvalidSquareRootInput() {
@@ -280,6 +323,11 @@ public class MathOperationTest {
             System.out.println("OperationException has been thrown");
 
         }
+    }
+
+    @Test(expected = OperationException.class)
+    public void factorialShouldThrowsWhenValuesAreNull() {
+        mathOperation.factorial(null);
     }
 
     private Object[] getInvalidFactorialInput() {

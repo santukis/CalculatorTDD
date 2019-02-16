@@ -43,6 +43,9 @@ public class MathOperation {
 
       throwsIfValuesAreInvalid(base, exponent);
 
+      if (exponent > Double.MAX_EXPONENT || exponent < Double.MIN_EXPONENT)
+         throw new OperationException("Exponent out of scope");
+
       if ((base == 0 || base == 1) && exponent != 0)
          return base;
 

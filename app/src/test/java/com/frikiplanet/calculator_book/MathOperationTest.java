@@ -49,17 +49,17 @@ public class MathOperationTest {
 
     @Parameters(method = "getInvalidInput")
     @Test(expected = OperationException.class)
-    public void additionShouldThrowsWhenValuesAreInvalid(double operand1, double operand2) {
+    public void additionShouldThrowsWhenValuesAreInvalid(Double operand1, Double operand2) {
         mathOperation.addition(operand1, operand2);
     }
 
     private Object[] getInvalidInput() {
         return new Object[]{
-                new Object[]{12, Double.MAX_VALUE},
-                new Object[]{Double.POSITIVE_INFINITY, 1},
-                new Object[]{-12.3, Double.NEGATIVE_INFINITY},
-                new Object[]{Double.NaN, 12},
-                new Object[]{Math.pow(2, 1024), -1}
+                new Object[]{12d, Double.MAX_VALUE},
+                new Object[]{Double.POSITIVE_INFINITY, 1d},
+                new Object[]{-12.3d, Double.NEGATIVE_INFINITY},
+                new Object[]{Double.NaN, 12d},
+                new Object[]{Math.pow(2, 1024), -1d}
         };
     }
 
@@ -71,9 +71,9 @@ public class MathOperationTest {
 
     private Object[] getNullInput() {
         return new Object[]{
-                new Object[]{null, new Double(5)},
+                new Object[]{null, 5.0},
                 new Object[]{null, null},
-                new Object[]{new Double(10), null}
+                new Object[]{10.0, null}
         };
     }
 
@@ -173,7 +173,7 @@ public class MathOperationTest {
     @Parameters(method = "getInvalidDivisionInput")
     @Test(expected = OperationException.class)
     public void divisionShouldThrowWhenOperandsOrResultAreInvalid(
-            double operand1, double operand2) {
+            Double operand1, Double operand2) {
 
         mathOperation.division(operand1, operand2);
     }
@@ -186,11 +186,11 @@ public class MathOperationTest {
 
     private Object[] getInvalidDivisionInput() {
         return $(
-                $(Double.MAX_VALUE, 1),
-                $(1.2, Double.NaN),
-                $(Double.POSITIVE_INFINITY, 0.1),
-                $(-12, Double.NEGATIVE_INFINITY),
-                $(12, 0)
+                $(Double.MAX_VALUE, 1d),
+                $(1.2d, Double.NaN),
+                $(Double.POSITIVE_INFINITY, 0.1d),
+                $(-12d, Double.NEGATIVE_INFINITY),
+                $(12d, 0d)
         );
     }
 
@@ -213,9 +213,7 @@ public class MathOperationTest {
                 $(-3, 4, 81),
                 $(-3, 3, -27),
                 $(2, -2, 0.25),
-                $(-3, -5, -0.00411522633),
-                $(0, 100_000_000, 0),
-                $(1, 100_000_000, 1)
+                $(-3, -5, -0.00411522633)
         );
     }
 
@@ -240,7 +238,10 @@ public class MathOperationTest {
                 $(-3, Double.POSITIVE_INFINITY),
                 $(Double.NaN, -1),
                 $(2, Double.MAX_VALUE),
-                $(2, 1024)
+                $(0, 100_000_000),
+                $(1, 100_000_000),
+                $(2d, -1024),
+                $(2d, 1024)
 
         );
     }

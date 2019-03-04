@@ -1,10 +1,16 @@
 package com.frikiplanet.calculator_book;
 
 
+import com.google.common.truth.Truth;
+
+import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.Arrays;
+import java.util.List;
 
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
@@ -158,7 +164,7 @@ public class MathOperationTest {
 
         double result = mathOperation.division(operand1, operand2);
 
-        assertThat(result).isWithin(1.0e-10).of(expectedValue);
+        Truth.assertThat(result).isWithin(1.0e-10).of(expectedValue);
     }
 
     private Object[] getValidDivisionInput() {
@@ -201,7 +207,7 @@ public class MathOperationTest {
 
         double result = mathOperation.exponentiation(base, exponent);
 
-        assertThat(result).isWithin(1.0e-5).of(expectedValue);
+        assertThat(result).isWithin(1e-10).of(expectedValue);
     }
 
     private Object[] getValidExponentiationInput() {

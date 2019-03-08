@@ -2,6 +2,7 @@ package com.frikiplanet.calculator_book;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import junitparams.JUnitParamsRunner;
@@ -13,18 +14,18 @@ import static junitparams.JUnitParamsRunner.$;
 @RunWith(JUnitParamsRunner.class)
 public class MathExpressionTest {
 
-   private MathExpression controller;
+   private MathExpression expression;
 
    @Before
    public void setUp() throws Exception {
-      controller = new MathExpression();
+      expression = new MathExpression();
    }
 
    @Parameters(method = "readExpressionData")
    @Test
     public void readShouldReturnExpectedExpression(
             String original, String expected) {
-      String result = controller.read(original);
+      String result = expression.read(original);
       assertThat(result).isEqualTo(expected);
     }
 
@@ -44,7 +45,7 @@ public class MathExpressionTest {
    @Test
    public void writeShouldReturnExpectedExpression(
            String original, String expected) {
-      String result = controller.write(original);
+      String result = expression.write(original);
       assertThat(result).isEqualTo(expected);
    }
 
@@ -70,7 +71,7 @@ public class MathExpressionTest {
    @Test
    public void addSymbolShouldReturnExpectedExpression(
            String original, String symbol, String expected) {
-      String result = controller.addSymbol(original, symbol);
+      String result = expression.addSymbol(original, symbol);
       assertThat(result).isEqualTo(expected);
    }
 
@@ -91,7 +92,7 @@ public class MathExpressionTest {
    @Parameters(method = "addInvalidSymbolInput")
    @Test(expected = ExpressionException.class)
    public void addSymbolShouldThrowWhenSymbolIsInvalid(String symbol) {
-       controller.addSymbol("", symbol);
+       expression.addSymbol("", symbol);
    }
 
    private Object[] addInvalidSymbolInput() {
@@ -110,7 +111,7 @@ public class MathExpressionTest {
    @Test
    public void removeSymbolShouldReturnExpectedExpression(
            String original, String expected) {
-      String result = controller.removeSymbol(original);
+      String result = expression.removeSymbol(original);
       assertThat(result).isEqualTo(expected);
    }
 
@@ -132,7 +133,7 @@ public class MathExpressionTest {
    @Test
    public void replaceSymbolShouldReturnExpectedExpression(
            String original, String symbol, String expected) {
-      String result = controller.replaceSymbol(original, symbol);
+      String result = expression.replaceSymbol(original, symbol);
       assertThat(result).isEqualTo(expected);
    }
 
@@ -152,7 +153,7 @@ public class MathExpressionTest {
    @Test
    public void tokenizeShouldReturnExpectedExpression(
            String original, Object[] expected) {
-      String[] result = controller.tokenize(original);
+      String[] result = expression.tokenize(original);
       assertThat(result).isEqualTo(expected);
    }
 
@@ -167,5 +168,22 @@ public class MathExpressionTest {
               new Object[]{"4^3", new Object[]{"4", "^", "3"}},
               new Object[]{"6/8", new Object[]{"6", "/", "8"}},
               new Object[] {"-2-1", new Object[]{"-2", "-1"}}};
+   }
+
+   @Parameters(method = "getInvalidExpression")
+   @Test(expected = ExpressionException.class)
+   public void throwsIfExpressionStartsWithInvalidSymbolShouldThrowWhenExpressionStartsWithInvalidSymbol(String expression) {
+      this.expression.throwsIfExpressionStartsWithInvalidSymbol(expression);
+   }
+
+   private Object[] getInvalidExpression() {
+      return new Object[] {
+               new Object[] { "+" },
+               new Object[] { "x" },
+               new Object[] { "^" },
+               new Object[] { "/" },
+               new Object[] { "." },
+               new Object[] { ")" },
+      };
    }
 }
